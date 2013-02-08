@@ -12,11 +12,13 @@ socket.onmessage = function(event) {
     for(var i=0, len=leapData.pointables.length; i < len; i++) {
         document.getElementById("keys").innerHTML += "<li>" 
             + leapData.pointables[i].id + " at " + Math.round(leapData.pointables[i].tipPosition[0]) 
-            + " (" + Math.round(parseFloat(leapData.pointables[i].tipPosition[1]) - (oldPositions[leapData.pointables[i].id] || 0)) + ")"//Math.round(leapData.pointables[i].tipVelocity[0]/20.0) + ")"
+            + " (" + Math.round(parseFloat(leapData.pointables[i].tipPosition[1]) - (oldPositions[leapData.pointables[i].id] || 0)) + ")"
             + "</li>";
         if(oldPositions[leapData.pointables[i].id] &&
            parseFloat(leapData.pointables[i].tipPosition[1]) - oldPositions[leapData.pointables[i].id] < -3) {
+            //"Y U NO USE tipVelocity??" "Because it's hyper inaccurate and sometimes triggers for no reason."
             document.getElementById("key" + i).style.background = "red";
+            playKey(keys[i]);
         } else {
             document.getElementById("key" + i).style.background = "#ccc";        
         }
