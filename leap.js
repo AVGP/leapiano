@@ -9,7 +9,7 @@ socket.onmessage = function(event) {
         if(parseFloat(a.tipPosition[0]) < parseFloat(b.tipPosition[0])) return -1;
         else return 1;
     });
-    for(var i=0, len=leapData.pointables.length; i < len; i++) {
+    for(var i=0, len=Math.min(8, leapData.pointables.length); i < len; i++) {
         document.getElementById("keys").innerHTML += "<li>" 
             + leapData.pointables[i].id + " at " + Math.round(leapData.pointables[i].tipPosition[0]) 
             + " (" + Math.round(parseFloat(leapData.pointables[i].tipPosition[1]) - (oldPositions[leapData.pointables[i].id] || 0)) + ")"
