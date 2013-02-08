@@ -1,28 +1,23 @@
 function addKey(i) {
     var dataURI = Notes.getDataURI(i);
-
-    // trick to deal with note getting hit multiple times before finishing...
-    var sounds = [
-        new Audio(dataURI),
-        new Audio(dataURI),
-        new Audio(dataURI)
-    ];
+    var sound = new Audio(dataURI);
     
-    return {sounds: sounds, currentIndex: 0};
+    return {sound: sound, currentIndex: 0};
 }
 
 
 function playKey(key) {
-    var pressedTimeout;    
-    // sound
-    key.sounds[key.currentIndex].pause();
+    if(!key.sound.paused) {
+        return;
+    }
+    
+    key.sound.pause();
     try {
-        key.sounds[key.currentIndex].currentTime = 0.001; //HACK - was for mobile safari, but sort of doesn't matter...
+        key.sound.currentTime = 0.001; //HACK - was for mobile safari, but sort of doesn't matter...
     } catch (x) {
         console.log(x);
     }
-    key.sounds[key.currentIndex].play();
-    key.currentIndex = ++key.currentIndex % key.sounds.length;
+    key.sound.play();
 }
     
 var keys = [];
