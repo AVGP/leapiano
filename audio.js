@@ -42,8 +42,8 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
     var DataGenerator = $.extend(function(styleFn, volumeFn, cfg) {
         cfg = $.extend({
             freq: 440,
-            volume: 32767,
-            sampleRate: 11025, // Hz
+            volume: 600, //32767,
+            sampleRate: 44100,//11025, // Hz
             seconds: .5,
             channels: 1
         }, cfg);
@@ -113,7 +113,7 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
         }
     });
     DataGenerator.style.default = DataGenerator.style.wave;
-    DataGenerator.volume.default = DataGenerator.volume.linearFade;
+    DataGenerator.volume.default = DataGenerator.volume.quadraticFade;
 
 
     function toDataURI(cfg) {
