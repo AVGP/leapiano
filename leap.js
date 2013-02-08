@@ -10,12 +10,13 @@ socket.onmessage = function(event) {
         else return 1;
     });
     for(var i=0, len=Math.min(8, leapData.pointables.length); i < len; i++) {
+        document.getElementById("key" + i).style.display = "inline-block";
         document.getElementById("keys").innerHTML += "<li>" 
             + leapData.pointables[i].id + " at " + Math.round(leapData.pointables[i].tipPosition[0]) 
             + " (" + Math.round(parseFloat(leapData.pointables[i].tipPosition[1]) - (oldPositions[leapData.pointables[i].id] || 0)) + ")"
             + "</li>";
         if(oldPositions[leapData.pointables[i].id] &&
-           parseFloat(leapData.pointables[i].tipPosition[1]) - oldPositions[leapData.pointables[i].id] < -3) {
+           parseFloat(leapData.pointables[i].tipPosition[1]) - oldPositions[leapData.pointables[i].id] < -1) {
             //"Y U NO USE tipVelocity??" "Because it's hyper inaccurate and sometimes triggers for no reason."
             document.getElementById("key" + i).style.background = "red";
             playKey(keys[i]);
@@ -27,6 +28,7 @@ socket.onmessage = function(event) {
     if(leapData.pointables.length < 8) {
         for(var i=leapData.pointables.length; i < 8; i++) {
             document.getElementById("key" + i).style.background = "#ccc";
+            document.getElementById("key" + i).style.display = "none";
         }
     }
 };
